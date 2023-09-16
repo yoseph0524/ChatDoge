@@ -1,19 +1,29 @@
 const OpenAI = require("openai");
 const express = require("express");
 const app = express();
+var cors = require("cors");
 
-app.get("/", function (req, res) {
-  res.send("Hello World");
-});
-
-app.listen(3000);
-
+//OpenAi
 const openai = new OpenAI({
   apiKey: "",
 });
 
-async function main() {
+// CORS Issue
+// let corsOptions = {
+//   origin: "https://www.domain.com",
+//   credentials: true,
+// };
+app.use(cors());
+
+//So that Post Request Can Happen
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Post Request
+app.post("/fortuneTell", async function (req, res) {
   const completion = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    max_tokens: 50,
     messages: [
       {
         role: "system",
@@ -32,10 +42,9 @@ async function main() {
       },
       { role: "user", content: "What's my fortune for today?" },
     ],
-    model: "gpt-3.5-turbo",
   });
-
-  console.log(completion.choices[0].message["content"]);
-}
-
-main();
+  let fortune = completion.choices[0].message["content"];
+  console.log(fortune);
+  res.send(fortune);
+});
+app.listen(3000);
