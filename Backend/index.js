@@ -5,7 +5,7 @@ var cors = require("cors");
 
 //OpenAi
 const openai = new OpenAI({
-  apiKey: "",
+  apiKey: "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",
 });
 
 // CORS Issue
@@ -45,6 +45,6 @@ app.post("/fortuneTell", async function (req, res) {
   });
   let fortune = completion.choices[0].message["content"];
   console.log(fortune);
-  res.send(fortune);
+  res.json({ assistant: fortune });
 });
 app.listen(3000);
