@@ -5,7 +5,7 @@ var cors = require("cors");
 
 //OpenAi
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: "",
 });
 
 // CORS Issue
@@ -14,7 +14,6 @@ const openai = new OpenAI({
 //   credentials: true,
 // };
 app.use(cors());
-
 //So that Post Request Can Happen
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
