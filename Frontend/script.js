@@ -11,11 +11,10 @@ function start() {
   const date = document.getElementById("date").value;
   const hour = document.getElementById("hour").value;
   if (date === "") {
-    alert("생년월일을 입력해주세요.");
+    alert("Enter your date of birthday");
     return;
   }
   myDateTime = date + hour;
-
   document.getElementById("intro").style.display = "none";
   document.getElementById("chat").style.display = "block";
 }
@@ -29,7 +28,7 @@ const sendMessage = async () => {
 `;
   chatBox.appendChild(chatMessage);
 
-  //userMessage 메세지 추가
+  //userMessage append
   userMessages.push(chatInput.value);
 
   chatInput.value = "";
@@ -49,23 +48,23 @@ const sendMessage = async () => {
   const data = await response.json();
   document.getElementById("loader").style.display = "none";
 
-  //assistantMessage 메세지 추가
+  //assistantMessage append
   assistantMessages.push(data.assistant);
 
-  //   const astrologerMessage = document.createElement("div");
-  //   astrologerMessage.classList.add("chat-message");
-  //   astrologerMessage.innerHTML = `<p class='assistant'>${data.assistant}</p>`;
-  //   const p = document.createElement("p");
-  //   p.innerHTML =
-  //     "추가로 링크를 눌러 작은 정성 배풀어주시면 더욱 좋은 운이 있으실겁니다. => ";
-  //   p.classList.add("assistant");
-  //   const link = document.createElement("a");
-  //   link.href = "https://toss.me/jocoding";
-  //   link.innerHTML = "복채 보내기";
-  //   p.appendChild(link);
-  //   astrologerMessage.appendChild(p);
-  //   ("<p> <a href='https://toss.me/jocoding'>복채 보내기</a></p>");
-  //   chatBox.appendChild(astrologerMessage);
+  const astrologerMessage = document.createElement("div");
+  astrologerMessage.classList.add("chat-message");
+  astrologerMessage.innerHTML = `<p class='assistant'>${data.assistant}</p>`;
+  const p = document.createElement("p");
+  p.innerHTML =
+    "You'll be even more lucky if you click the link and give a small fund. => ";
+  p.classList.add("assistant");
+  const link = document.createElement("a");
+  link.href = "https://toss.me/jocoding";
+  link.innerHTML = "Sponsor";
+  p.appendChild(link);
+  astrologerMessage.appendChild(p);
+  ("<p> <a href='https://toss.me/jocoding'>Sponsor</a></p>");
+  chatBox.appendChild(astrologerMessage);
 };
 
 document
