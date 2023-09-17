@@ -53,11 +53,16 @@ const sendMessage = async () => {
 
   const astrologerMessage = document.createElement("div");
   astrologerMessage.classList.add("chat-message");
-  astrologerMessage.innerHTML = `<p class='assistant'>${data.assistant}</p>`;
+
+  let formattedMessage = data.assistant.replace(/\n\s*-/g, "<br>-");
+  console.log(formattedMessage);
+  astrologerMessage.innerHTML = `<p class='assistant'>${formattedMessage}</p>`;
+  const hr = document.createElement("hr");
+  astrologerMessage.appendChild(hr);
   const p = document.createElement("p");
   p.innerHTML =
     "You'll be even more lucky if you click the link and give a small fund. => ";
-  p.classList.add("assistant");
+  p.classList.add("assistant", "lucky");
   const link = document.createElement("a");
   link.href = "https://toss.me/jocoding";
   link.innerHTML = "Sponsor";

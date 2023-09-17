@@ -63,7 +63,7 @@ app.post("/fortuneTell", async function (req, res) {
       messages.push(
         JSON.parse(
           '{"role": "assistant", "content": "' +
-            String(assistantMessages.shift().replace(/\n/g, "<br>")) +
+            String(assistantMessages.shift().replace(/\n/g, "")) +
             '"}'
         )
       );

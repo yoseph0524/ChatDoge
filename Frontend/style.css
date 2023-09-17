@@ -31,6 +31,7 @@ body {
 .chat-message p {
   margin: 0;
   padding: 0;
+  text-align: right;
 }
 
 .chat-input {
@@ -62,7 +63,7 @@ body {
 
 .assistant {
   color: blue;
-  text-align: left;
+  text-align: left !important;
 }
 
 .intro-container {
