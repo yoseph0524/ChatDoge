@@ -33,17 +33,20 @@ const sendMessage = async () => {
 
   chatInput.value = "";
 
-  const response = await fetch("http://localhost:3000/fortuneTell", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      myDateTime: myDateTime,
-      userMessages: userMessages,
-      assistantMessages: assistantMessages,
-    }),
-  });
+  const response = await fetch(
+    "https://fnhlgmlpxaugxpvyayrx2em44i0trwsq.lambda-url.us-east-1.on.aws/fortuneTell",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        myDateTime: myDateTime,
+        userMessages: userMessages,
+        assistantMessages: assistantMessages,
+      }),
+    }
+  );
 
   const data = await response.json();
   document.getElementById("loader").style.display = "none";

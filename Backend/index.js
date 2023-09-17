@@ -1,6 +1,7 @@
 const OpenAI = require("openai");
 const express = require("express");
 const app = express();
+const severless = require("serverless-http");
 var cors = require("cors");
 
 //OpenAi
@@ -9,11 +10,13 @@ const openai = new OpenAI({
 });
 
 // CORS Issue
-// let corsOptions = {
-//   origin: "https://www.domain.com",
-//   credentials: true,
-// };
-app.use(cors());
+let corsOptions = {
+  origin: "*",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+};
+app.use(cors(corsOptions));
 //So that Post Request Can Happen
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -76,7 +79,9 @@ app.post("/fortuneTell", async function (req, res) {
   });
 
   let fortune = completion.choices[0].message["content"];
-  console.log(fortune);
   res.json({ assistant: fortune });
 });
-app.listen(3000);
+
+module.exports.handler = severless(app);
+
+//app.listen(3000);
